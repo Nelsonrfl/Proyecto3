@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InPlast - Gestión de Pedidos y Stock</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/50x50/007bff/FFFFFF?text=INPLAST" alt="InPlast Logo">
+            <h1>InPlast</h1>
+        </div>
+        <nav id="mainNav">
+            </nav>
+        <div class="header-right">
+            <div id="userInfo" class="user-info" style="display: none;">
+                <span id="userName"></span>
+                <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+            </div>
+            <div id="cartIcon" class="cart-icon" style="display: none;">
+                <span class="cart-count" id="cartCount">0</span>
+                🛒
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="loginScreen" class="screen active">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+        </section>
+
+        <section id="customerScreen" class="screen">
+            <h2 id="customerScreenTitle">Datos del Pedido</h2>
+            <div class="search-bar">
+                <input type="text" id="productSearch" placeholder="Buscar productos por nombre o descripción...">
+            </div>
+            <div id="productList" class="product-list">
+                <p style="text-align: center; grid-column: 1 / -1;">Ingrese un término de búsqueda para ver productos.</p>
+            </div>
+        </section>
+
+        <section id="cartScreen" class="screen">
+            <h2>Carrito de Compras</h2>
+            <div id="cartItems" class="cart-items-container">
+                </div>
+            <p id="emptyCartMessage" class="empty-message" style="display: none;">El carrito está vacío.</p>
+            <div class="cart-summary">
+                <p>Subtotal: $<span id="cartSubtotal">0.00</span></p>
+                <p>IVA (15%): $<span id="cartIVA">0.00</span></p>
+                <h3>Total: $<span id="cartTotal">0.00</span></h3>
+            </div>
+            <div class="cart-actions">
+                <button id="confirmOrderBtn" class="btn-primary" disabled>Confirmar Pedido</button>
+                <button id="continueShoppingBtn" class="btn-secondary">Seguir Comprando</button>
+            </div>
+        </section>
+
+        <section id="invoiceScreen" class="screen">
+            <h2>¡Pedido Confirmado!</h2>
+            <div class="invoice-details">
+                <p><strong>N° Pedido:</strong> <span id="invoiceOrderId"></span></p>
+                <p><strong>Cliente:</strong> <span id="invoiceCustomerName"></span></p>
+                <p><strong>Fecha:</strong> <span id="invoiceDate"></span></p>
+            </div>
+            <h3>Detalle del Pedido:</h3>
+            <ul id="invoiceItemsList" class="invoice-items-list">
+                </ul>
+            <div class="invoice-summary">
+                <p>Subtotal: $<span id="invoiceSubtotal">0.00</span></p>
+                <p>IVA: $<span id="invoiceIVA">0.00</span></p>
+                <h3>Total: $<span id="invoiceTotal">0.00</span></h3>
+            </div>
+            <button id="newOrderBtn" class="btn-primary">Hacer Nuevo Pedido</button>
+        </section>
+
+        <section id="ordersScreen" class="screen">
+            <h2 id="ordersScreenTitle">Mis Órdenes de Compra</h2>
+            <div id="ordersList" class="orders-list">
+                </div>
+            <p id="noOrdersMessage" class="empty-message" style="display: none;">No tienes órdenes realizadas aún.</p>
+            <div id="customerOrdersActions" class="customer-orders-actions" style="display: none;">
+                <button id="goToNewOrderBtn" class="btn-primary">Ir a Hacer un Nuevo Pedido</button>
+                <button id="logoutFromOrdersBtn" class="btn-secondary">Cerrar Sesión</button>
+            </div>
+        </section>
+
+        <section id="inventoryScreen" class="screen">
+            <h2>Gestión de Inventario</h2>
+            <button id="addNewProductBtn" class="btn-primary add-new-product-btn">Añadir Nuevo Producto</button>
+
+            <div id="productFormContainer" class="form-container" style="display: none;">
+                <h3 id="formTitle">Añadir Nuevo Producto</h3>
+                <form id="productForm">
+                    <input type="hidden" id="productId"> <div class="form-group">
+                        <label for="productName">Nombre:</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Descripción:</label>
+                        <textarea id="productDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Precio ($):</label>
+                        <input type="number" id="productPrice" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productStock">Stock:</label>
+                        <input type="number" id="productStock" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productImageUrl">URL de Imagen (opcional):</label>
+                        <input type="url" id="productImageUrl">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Guardar Producto</button>
+                        <button type="button" id="cancelProductFormBtn" class="btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="inventoryProductList" class="inventory-product-list">
+                </div>
+            <p id="noInventoryMessage" class="empty-message" style="display: none;">No hay productos en el inventario.</p>
+        </section>
+    </main>
+
+    <div id="messageBox" class="message-box"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
