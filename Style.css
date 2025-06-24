@@ -1,0 +1,740 @@
+/* Variables CSS */
+:root {
+    --primary-color: #007bff; /* Azul vibrante */
+    --secondary-color: #6c757d; /* Gris oscuro */
+    --accent-color: #28a745; /* Verde para éxito/confirmación */
+    --danger-color: #dc3545; /* Rojo para errores/eliminar */
+    --warning-color: #ffc107; /* Amarillo para advertencias */
+    --info-color: #17a2b8; /* Azul claro para información */
+    --background-light: #f8f9fa; /* Fondo claro */
+    --text-color: #343a40; /* Texto oscuro */
+    --border-color: #dee2e6; /* Borde gris claro */
+    --header-bg: #343a40; /* Fondo del header */
+    --header-text: #ffffff; /* Texto del header */
+    --card-bg: #ffffff; /* Fondo de tarjetas */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Base global */
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header .logo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+/* Navegación Principal (Menú) */
+nav#mainNav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav#mainNav a {
+    color: var(--header-text);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+}
+
+nav#mainNav a:hover,
+nav#mainNav a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para el menú de hamburguesa */
+.menu-toggle {
+    display: none; /* Oculto por defecto en pantallas grandes */
+    background: none;
+    border: none;
+    color: var(--header-text);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto; /* Empuja el botón a la derecha */
+}
+
+/* Ocultar la navegación en móviles por defecto */
+@media (max-width: 768px) {
+    nav#mainNav {
+        display: none; /* Oculta la navegación por defecto en móviles */
+        flex-direction: column;
+        width: 100%; /* Ocupa todo el ancho */
+        background-color: var(--header-bg); /* Mismo fondo que el header */
+        position: absolute;
+        top: 70px; /* Ajustar según la altura de tu header */
+        left: 0;
+        box-shadow: var(--box-shadow);
+        padding: 1rem 0;
+        z-index: 1000; /* Asegura que esté por encima de otros contenidos */
+    }
+
+    nav#mainNav.active {
+        display: flex; /* Muestra la navegación cuando tiene la clase 'active' */
+    }
+
+    nav#mainNav a {
+        padding: 1rem 2rem; /* Más padding para los elementos del menú en móvil */
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador entre ítems */
+    }
+
+    nav#mainNav a:last-child {
+        border-bottom: none;
+    }
+
+    .menu-toggle {
+        display: block; /* Muestra el botón de hamburguesa en móviles */
+    }
+
+    header .header-right {
+        width: 100%; /* Asegura que los elementos de la derecha se alineen bien */
+        display: flex;
+        justify-content: flex-end; /* Alinea a la derecha */
+        margin-top: 1rem; /* Espacio entre el logo/hamburguesa y la info de usuario */
+    }
+
+    header {
+        flex-wrap: nowrap; /* Desactiva el wrap para el layout principal del header en móvil */
+        align-items: flex-start; /* Alinea los ítems arriba */
+        padding-bottom: 0;
+    }
+}
+
+
+/* Elementos de la derecha del header */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.cart-icon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+}
+
+.cart-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Contenido Principal */
+main {
+    flex-grow: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+}
+
+/* Pantallas (Secciones) */
+.screen {
+    display: none;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem; /* Espacio entre pantallas si fueran visibles */
+}
+
+.screen.active {
+    display: block; /* Solo la pantalla activa es visible */
+}
+
+.screen h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Formularios genéricos */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group textarea {
+    width: calc(100% - 20px); /* Resta el padding */
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    box-sizing: border-box; /* Incluye padding en el ancho */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Botones genéricos */
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-logout {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%); /* Ajustar color más oscuro */
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: darken(var(--secondary-color), 10%);
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: darken(var(--danger-color), 10%);
+    transform: translateY(-2px);
+}
+
+.btn-logout {
+    background-color: transparent;
+    color: var(--header-text);
+    border: 1px solid var(--header-text);
+    padding: 8px 15px;
+}
+
+.btn-logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Mensajes de feedback */
+.message-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color); /* Color por defecto */
+    color: white;
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.message-box.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos específicos para customerScreen (Product List) */
+.search-bar {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 500px;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 50px; /* Borde más redondeado para la barra de búsqueda */
+    font-size: 1.1rem;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    justify-content: center; /* Centra las tarjetas si no llenan la fila */
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: contain; /* Para que la imagen se ajuste sin recortarse */
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    background-color: #f0f0f0; /* Fondo para imágenes placeholder */
+}
+
+.product-card h3 {
+    font-size: 1.4rem;
+    margin: 0.8rem 0;
+    color: var(--primary-color);
+}
+
+.product-card p {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    flex-grow: 1; /* Permite que la descripción ocupe espacio */
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-top: 1rem;
+}
+
+.product-card .stock {
+    font-size: 0.9rem;
+    color: var(--info-color);
+    margin-bottom: 1rem;
+}
+
+.product-card .add-to-cart {
+    display: flex;
+    flex-direction: column; /* Apila input y botón */
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%; /* Asegura que ocupen el ancho de la tarjeta */
+}
+
+.product-card .add-to-cart input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-size: 1rem;
+}
+
+.product-card .add-to-cart .add-btn {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Estilos para cartScreen */
+.cart-items-container {
+    max-height: 400px; /* Altura máxima para scroll */
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.cart-item-info p {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+.cart-summary {
+    text-align: right;
+    padding-top: 1rem;
+    border-top: 2px solid var(--primary-color);
+    margin-top: 1.5rem;
+}
+
+.cart-summary p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.cart-summary h3 {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Estilos para invoiceScreen */
+.invoice-details {
+    background-color: #e9ecef;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+.invoice-details p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.invoice-items-list {
+    list-style: none;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+.invoice-items-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.invoice-items-list li:last-child {
+    border-bottom: none;
+}
+
+.invoice-summary {
+    text-align: right;
+    padding-top: 1rem;
+    border-top: 2px solid var(--primary-color);
+}
+
+.invoice-summary p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.invoice-summary h3 {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+}
+
+/* Estilos para ordersScreen (Tabla de Órdenes) */
+.orders-list table,
+.inventory-product-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.orders-list th,
+.inventory-product-list th,
+.orders-list td,
+.inventory-product-list td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.orders-list th,
+.inventory-product-list th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.orders-list tr:nth-child(even),
+.inventory-product-list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.orders-list tr:hover,
+.inventory-product-list tr:hover {
+    background-color: #e9e9e9;
+}
+
+.order-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.order-status.pendiente {
+    background-color: var(--warning-color);
+    color: #856404; /* Color de texto más oscuro para contraste */
+}
+
+.order-status.entregado {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.order-status.cancelado {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.order-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.order-items-list li {
+    margin-bottom: 3px;
+}
+
+.customer-orders-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Estilos para inventoryScreen (Gestión de Productos) */
+.add-new-product-btn {
+    margin-bottom: 2rem;
+}
+
+.form-container {
+    background-color: #e6f7ff; /* Un azul muy claro para el formulario de producto */
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+}
+
+.form-container h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.inventory-product-list img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: var(--border-radius);
+    background-color: #f0f0f0;
+}
+
+.inventory-product-list td button {
+    margin-right: 0.5rem;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+}
+
+/* Media Queries para Responsividad General */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    header .logo {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    nav#mainNav {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .screen {
+        padding: 1.5rem;
+    }
+
+    .screen h2 {
+        font-size: 1.6rem;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+
+    .cart-actions,
+    .customer-orders-actions,
+    .form-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .btn-primary, .btn-secondary, .btn-danger {
+        width: 100%;
+    }
+
+    .orders-list th, .orders-list td,
+    .inventory-product-list th, .inventory-product-list td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Ocultar descripción en tablas pequeñas para ahorrar espacio */
+    .inventory-product-list td:nth-child(4) { /* Columna de descripción */
+        display: none;
+    }
+    .inventory-product-list th:nth-child(4) {
+        display: none;
+    }
+
+    .message-box {
+        width: 90%;
+        left: 5%;
+        transform: translateX(0);
+        bottom: 10px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+}
+
+/* Utilities (Puedes usar estas clases para estados específicos) */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
